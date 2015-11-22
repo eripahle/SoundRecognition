@@ -1,0 +1,36 @@
+c:\users\hasna\documents\visual studio 2013\Projects\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\Hasna\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\RabbitMQ.Client.xml
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\MySql.Data.dll
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.Math.dll
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.Statistics.dll
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\ZedGraph.dll
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.MachineLearning.dll
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.Math.pdb
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.Math.xml
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.Statistics.pdb
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.Statistics.xml
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\ZedGraph.xml
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.MachineLearning.pdb
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\Accord.MachineLearning.xml
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\SharpDX.DirectSound.dll
+C:\Users\pahlevi\Documents\Visual Studio 2013\Projects\SoundRecognition\WindowsFormsApplication1\bin\Debug\SharpDX.dll
+D:\TA\SoundRecognize\SoundRecognition\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe.config
+D:\TA\SoundRecognize\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+D:\TA\SoundRecognize\SoundRecognition\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
