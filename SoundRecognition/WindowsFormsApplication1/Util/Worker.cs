@@ -7,11 +7,15 @@ using Accord.DirectSound;
 using Accord.Audio.Filters;
 using System.Threading;
 using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace WindowsFormsApplication1.Util
 {
     public class Worker
     {
+        private MainForm mainForm;
+        public MainForm MainForm {get;set;}
+
         private MemoryStream stream;
 
         private IAudioSource source;
@@ -33,6 +37,7 @@ namespace WindowsFormsApplication1.Util
 
         private const string RECOGNIZER_APP = "\"D:\\fingerprint_recognizer_incrabbit.jar\"";		
         private const string jarLoc = "\"c:\\Program Files\\Java\\jre8\\bin\\java.exe\"";
+        private const string JAVA_LOCATION = "\"C:\\Program Files\\Java\\jdk1.8.0_20\\bin\\java.exe\"";
 
         public Worker(int p)
         {
@@ -65,11 +70,13 @@ namespace WindowsFormsApplication1.Util
                 
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.UseShellExecute = false;
-                processStartInfo.FileName = jarLoc;
-                processStartInfo.Arguments = "-jar " + RECOGNIZER_APP + " D:\\file" + p + ".wav";
+                processStartInfo.FileName = JAVA_LOCATION;
+                //processStartInfo.Arguments = "-jar " + RECOGNIZER_APP + " D:\\file" + p + ".wav";
+                processStartInfo.Arguments = "-version";
                 //process.FileName = "java";
                 //process.Arguments = "-version";
 
+                Console.WriteLine("java locaton : "+JAVA_LOCATION);
                 Process startProcess =  System.Diagnostics.Process.Start(processStartInfo);
                 startProcess.WaitForExit();
 
@@ -78,7 +85,7 @@ namespace WindowsFormsApplication1.Util
 
                 //Console.WriteLine("For queue : "+p+".wav");
                 Console.WriteLine("Message Similarity : " + messageSimilarity);
-                
+                MessageBox.Show(messageSimilarity);
                 Console.WriteLine("req " + p + " archived");
                 
                 //alerting
