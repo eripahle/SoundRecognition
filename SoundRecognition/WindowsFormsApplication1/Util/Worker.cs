@@ -13,8 +13,9 @@ namespace WindowsFormsApplication1.Util
 {
     public class Worker
     {
-        private MainForm mainForm;
-        public MainForm MainForm {get;set;}
+
+        public MainForm mainForm { get; set; }
+        public ListView lstLog { get; set; }
 
         private MemoryStream stream;
 
@@ -33,11 +34,16 @@ namespace WindowsFormsApplication1.Util
         private Boolean status = false;
 
         private volatile bool _shouldStop;
-        private int p;
+        public int p{get; set;}
 
-        private const string RECOGNIZER_APP = "\"D:\\fingerprint_recognizer_incrabbit.jar\"";		
+
+        private const string RECOGNIZER_APP = "\"D:\\fingerprint_recognizer_incrabbit.jar\"";
         private const string jarLoc = "\"c:\\Program Files\\Java\\jre8\\bin\\java.exe\"";
         private const string JAVA_LOCATION = "\"C:\\Program Files\\Java\\jdk1.8.0_20\\bin\\java.exe\"";
+
+        public delegate void ProcessDelegate(String valueItem);
+        public ProcessDelegate processDelegate { get; set; }
+
 
         public Worker(int p)
         {
@@ -50,12 +56,19 @@ namespace WindowsFormsApplication1.Util
             return status;
         }
 
+        public void RequestStop()
+        {
+            _shouldStop = true;
+        }
+
+
         // This method will be called when the thread is started. 
         public void DoWork()
         {
             RabbitMQ rabbitMQ = new RabbitMQ();
             String messageSimilarity;
-            while (true) { 
+            
+            while (!_shouldStop) { 
                 startReq();                
                 Thread.Sleep(6000);
                 stopReq(p);
@@ -71,8 +84,8 @@ namespace WindowsFormsApplication1.Util
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.UseShellExecute = false;
                 processStartInfo.FileName = JAVA_LOCATION;
-                //processStartInfo.Arguments = "-jar " + RECOGNIZER_APP + " D:\\file" + p + ".wav";
-                processStartInfo.Arguments = "-version";
+                processStartInfo.Arguments = "-jar " + RECOGNIZER_APP + " D:\\file" + p + ".wav";
+                //processStartInfo.Arguments = "-version";
                 //process.FileName = "java";
                 //process.Arguments = "-version";
 
@@ -85,11 +98,19 @@ namespace WindowsFormsApplication1.Util
 
                 //Console.WriteLine("For queue : "+p+".wav");
                 Console.WriteLine("Message Similarity : " + messageSimilarity);
-                MessageBox.Show(messageSimilarity);
+                //MessageBox.Show(messageSimilarity);
                 Console.WriteLine("req " + p + " archived");
-                
-                //alerting
 
+                //send notification to listview
+                ListViewItem logItem = new ListViewItem();
+
+                logItem.SubItems.Add("Hooray Message");
+                //Console.WriteLine("log Item : " + logItem.ToString());
+                //Console.WriteLine("lstLog : " + lstLog.ToString());
+                //lstLog.Items.Add(logItem);
+                lstLog.Invoke(processDelegate, messageSimilarity);
+                logItem = null;
+                //ringing an alert
             }
 
         }
@@ -173,5 +194,6 @@ namespace WindowsFormsApplication1.Util
             samples += eventArgs.Signal.Samples;
             frames += eventArgs.Signal.Length;
         }
+
     }
 }
