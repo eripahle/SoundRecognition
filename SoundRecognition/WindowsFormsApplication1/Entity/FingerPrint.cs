@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1.Entity
 {
-    class FingerPrint
+    public class FingerPrint
     {
         private String fingerPrintId;
 

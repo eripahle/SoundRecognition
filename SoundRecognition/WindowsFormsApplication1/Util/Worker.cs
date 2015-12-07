@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using Accord.Audio;
@@ -8,14 +9,15 @@ using Accord.Audio.Filters;
 using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
+using WindowsFormsApplication1.Entity;
 
 namespace WindowsFormsApplication1.Util
 {
     public class Worker
     {
 
-        public MainForm mainForm { get; set; }
-        public ListView lstLog { get; set; }
+      
+        public DataGridView dtgLogMessage { get; set; }
 
         private MemoryStream stream;
 
@@ -41,8 +43,9 @@ namespace WindowsFormsApplication1.Util
         private const string jarLoc = "\"c:\\Program Files\\Java\\jre8\\bin\\java.exe\"";
         private const string JAVA_LOCATION = "\"C:\\Program Files\\Java\\jdk1.8.0_20\\bin\\java.exe\"";
 
-        public delegate void ProcessDelegate(String valueItem);
+        public delegate void ProcessDelegate(List<LogAudioDetection> valueItem);
         public ProcessDelegate processDelegate { get; set; }
+
 
 
         public Worker(int p)
@@ -74,21 +77,12 @@ namespace WindowsFormsApplication1.Util
                 stopReq(p);
                 
                 //algoritma pattern matching
-                //status = return value pemanggilan aplikasi pattern matching;                 
-                //string strCmdText;
-                //strCmdText = jarLoc + RECOGNIZER_APP+" D:\\file"+p+".wav";
-                //Console.WriteLine("strCmdText : " + strCmdText);
-
-                ///System.Diagnostics.Process process = System.Diagnostics.Process.Start("CMD.exe", strCmdText);
-                
+            
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.UseShellExecute = false;
                 processStartInfo.FileName = JAVA_LOCATION;
                 processStartInfo.Arguments = "-jar " + RECOGNIZER_APP + " D:\\file" + p + ".wav";
-                //processStartInfo.Arguments = "-version";
-                //process.FileName = "java";
-                //process.Arguments = "-version";
-
+           
                 Console.WriteLine("java locaton : "+JAVA_LOCATION);
                 Process startProcess =  System.Diagnostics.Process.Start(processStartInfo);
                 startProcess.WaitForExit();
@@ -105,15 +99,69 @@ namespace WindowsFormsApplication1.Util
                 ListViewItem logItem = new ListViewItem();
 
                 logItem.SubItems.Add("Hooray Message");
-                //Console.WriteLine("log Item : " + logItem.ToString());
-                //Console.WriteLine("lstLog : " + lstLog.ToString());
-                //lstLog.Items.Add(logItem);
-                lstLog.Invoke(processDelegate, messageSimilarity);
+          
+                //send message to datagrid view in main form 
+                List<LogAudioDetection> log = ParseMessage(messageSimilarity);
+                if(log != null) dtgLogMessage.Invoke(processDelegate, log);
                 logItem = null;
+
+
                 //ringing an alert
+               
+
+                
             }
 
         }
+
+        private  List<LogAudioDetection> ParseMessage(string rawMessage)
+        {
+            if(rawMessage != "")
+            {
+                string[] messageSeparator = { "||" };
+
+                String[] rawLogAudioMessage = rawMessage.Split(messageSeparator, StringSplitOptions.None);
+
+                string message = "";
+                List<LogAudioDetection> log = new List<LogAudioDetection>();
+                for(int i=0; i<rawLogAudioMessage.Length-1;i++){
+                    message = rawLogAudioMessage[i];
+                    Console.WriteLine("In Worker :");
+                    Console.WriteLine(message);
+                    string[] resultItem = message.Split('#');
+                    LogAudioDetection item = new LogAudioDetection();
+                    item.FingerprintId.FingerPrintId=resultItem[0];
+                    item.CreateMessageSoundDetected(new string[] { resultItem[1], resultItem[2] });
+
+                    DateTime current = DateTime.Now;
+                    item.LogDetectionTime = current.ToString();
+                    item.LogSeenStatus = "false";
+
+                    String messageCode = ""+current.Year;
+                    messageCode += GenerateStringNumber(current.Month);
+                    messageCode += GenerateStringNumber(current.Day);
+                    messageCode += GenerateStringNumber(current.Hour);
+                    messageCode += GenerateStringNumber(current.Minute);
+                    messageCode += GenerateStringNumber(current.Second);
+                    item.LogId = messageCode;
+
+                    log.Add(item);
+                }
+
+                return log;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private string GenerateStringNumber(int num)
+        {
+            if (num < 10) return "0" + num;
+            else return "" + num;
+        }
+
         public void RequestStop(int counter)
         {
             stopReq(counter);

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Controls;
 using WindowsFormsApplication1.Entity;
 using WindowsFormsApplication1.Util;
 
@@ -25,11 +26,31 @@ namespace WindowsFormsApplication1
         Worker[] worker;
         const int MAX_PROCESS = 6;
 
+
         public MainForm()
         {
             InitializeComponent();
             InitializeSystemApps();
+            initCustom();
             
+        }
+
+        private void initCustom()
+        {
+            this.dtgLogMessage.DefaultCellStyle.WrapMode = DataGridViewTriState.True; //cell width wrap text
+            this.dtgcMessage.Width = this.dtgLogMessage.Width - this.dtgcCode.Width - this.dtgcNo.Width-this.dtgcWaktu.Width;
+
+            AddRowDataGridNumber(this.dtgLogMessage);
+           
+            
+        }
+
+        private void AddRowDataGridNumber(DataGridView DataGrid)
+        {
+            foreach(DataGridViewRow row in DataGrid.Rows)
+            {
+                DataGrid.Rows[row.Index].HeaderCell.Value = row.Index + 1;
+            }
         }
 
         private void InitializeSystemApps()
@@ -78,7 +99,7 @@ namespace WindowsFormsApplication1
             Console.WriteLine("Clicked Alrt");
         }
 
-        private delegate void ProcessDelegate(ListViewItem listViewItem);
+        
 
         private void btnstart_Click(object sender, EventArgs e)
         {
@@ -88,22 +109,14 @@ namespace WindowsFormsApplication1
             for (int i = 0; i < MAX_PROCESS; i++)
             {
 
-                //send notification to listview
-                ListViewItem logItem = new ListViewItem();
-
-                logItem.SubItems.Add("Hooray Message");
-                //Console.WriteLine("log Item : " + logItem.ToString());
-
-                this.lstLog.Items.Add(logItem);
-                logItem = null;
-                
-
+           
                 Console.WriteLine("Running thread " + (i + 1));
 
                 worker[i] = new Worker(i + 1);
-                worker[i].lstLog = this.lstLog;
+                worker[i].dtgLogMessage = this.dtgLogMessage;
 
                 worker[i].processDelegate = new Worker.ProcessDelegate(addListItem);
+
                 workerThread[i] = new Thread(worker[i].DoWork);
 
                 /*
@@ -117,15 +130,44 @@ namespace WindowsFormsApplication1
             }            
         }
 
-        private void addListItem(String valueItem)
+        private void addListItem(List<LogAudioDetection> contentMessage)
         {
-            Console.WriteLine("Value Item : " + valueItem);
-            //this.lstLog.Items.Add(lstItemLog);
-            this.lstLog.Items.Add(valueItem,3);
+            Console.WriteLine("Value Item : " + contentMessage);
+            int idxLastRow = this.dtgLogMessage.RowCount;
+            foreach(LogAudioDetection data in contentMessage)
+            {
+                string[] rowData = { (idxLastRow++).ToString(), data.LogId,data.LogDetectionTime, data.LogMessage };
+                this.dtgLogMessage.Rows.Add(rowData);
+                this.dtgLogMessage.Rows[idxLastRow-2].DefaultCellStyle.BackColor = Color.Gray;
+            }
+
+            AddRowDataGridNumber(this.dtgLogMessage);
         }
 
         private void lstLog_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
+        }
+
+        private void OnCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            this.dtgLogMessage.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnDeleteLog_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Memasuki btnDeleteLog_Click!");
+            foreach (DataGridViewCell toDeleteRow in this.dtgLogMessage.SelectedCells) {
+                Console.WriteLine("in btnDeleteLog_Click");
+                Console.WriteLine("Row Index to Delete : " + toDeleteRow.RowIndex);
+                this.dtgLogMessage.Rows.RemoveAt(toDeleteRow.RowIndex);
+            }
             
         }
     }
