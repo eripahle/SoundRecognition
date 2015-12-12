@@ -84,6 +84,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\AlertSound.cs" />
     <Compile Include="Entity\AudioType.cs" />
     <Compile Include="Entity\FingerPrint.cs" />
     <Compile Include="Entity\LogAudioDetection.cs" />
@@ -93,22 +94,36 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PleaseWaitForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PleaseWaitForm.Designer.cs">
+      <DependentUpon>PleaseWaitForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Util\AlertSoundManager.cs" />
+    <Compile Include="Util\AppCommonVar.cs" />
     <Compile Include="Util\DBEngine.cs" />
+    <Compile Include="Util\Messages.cs" />
+    <Compile Include="Util\PleaseWaitWorker.cs" />
     <Compile Include="Util\RabbitMQ.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PleaseWaitForm.resx">
+      <DependentUpon>PleaseWaitForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -127,6 +142,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Util\Worker.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asset\img\please_wait.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asset\img\please_wait%281%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asset\img\please_wait%281%29%281%29.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="asset\img\please_wait_big_snake.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

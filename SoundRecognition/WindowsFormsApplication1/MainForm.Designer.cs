@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.btnStart = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.lblJudul = new System.Windows.Forms.Label();
@@ -40,13 +41,15 @@
             this.dtgcWaktu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dtgcMessage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpbControlLog = new System.Windows.Forms.GroupBox();
-            this.btnDeleteLog = new System.Windows.Forms.Button();
             this.btnDeleteAllLog = new System.Windows.Forms.Button();
+            this.btnDeleteLog = new System.Windows.Forms.Button();
             this.grpbSuaraAlarm = new System.Windows.Forms.GroupBox();
+            this.alertPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.grpbPendeteksianSuara = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dtgLogMessage)).BeginInit();
             this.grpbControlLog.SuspendLayout();
             this.grpbSuaraAlarm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.alertPlayer)).BeginInit();
             this.grpbPendeteksianSuara.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,14 +86,11 @@
             // cmbxAlarm
             // 
             this.cmbxAlarm.FormattingEnabled = true;
-            this.cmbxAlarm.Items.AddRange(new object[] {
-            "Alert1",
-            "Alert2",
-            "Alert3"});
             this.cmbxAlarm.Location = new System.Drawing.Point(6, 19);
             this.cmbxAlarm.Name = "cmbxAlarm";
             this.cmbxAlarm.Size = new System.Drawing.Size(188, 21);
             this.cmbxAlarm.TabIndex = 6;
+            this.cmbxAlarm.Text = "--SELECT---";
             this.cmbxAlarm.SelectedIndexChanged += new System.EventHandler(this.cmbxAlarm_SelectedIndexChanged);
             // 
             // ckLisBxSensor
@@ -166,6 +166,16 @@
             this.grpbControlLog.TabStop = false;
             this.grpbControlLog.Text = "Log Aktivitas Aplikasi";
             // 
+            // btnDeleteAllLog
+            // 
+            this.btnDeleteAllLog.Location = new System.Drawing.Point(87, 15);
+            this.btnDeleteAllLog.Name = "btnDeleteAllLog";
+            this.btnDeleteAllLog.Size = new System.Drawing.Size(107, 23);
+            this.btnDeleteAllLog.TabIndex = 1;
+            this.btnDeleteAllLog.Text = "Hapus Semua Log";
+            this.btnDeleteAllLog.UseVisualStyleBackColor = true;
+            this.btnDeleteAllLog.Click += new System.EventHandler(this.btnDeleteAllLog_Click);
+            // 
             // btnDeleteLog
             // 
             this.btnDeleteLog.Location = new System.Drawing.Point(6, 15);
@@ -176,25 +186,26 @@
             this.btnDeleteLog.UseVisualStyleBackColor = true;
             this.btnDeleteLog.Click += new System.EventHandler(this.btnDeleteLog_Click);
             // 
-            // btnDeleteAllLog
-            // 
-            this.btnDeleteAllLog.Location = new System.Drawing.Point(87, 15);
-            this.btnDeleteAllLog.Name = "btnDeleteAllLog";
-            this.btnDeleteAllLog.Size = new System.Drawing.Size(107, 23);
-            this.btnDeleteAllLog.TabIndex = 1;
-            this.btnDeleteAllLog.Text = "Hapus Semua Log";
-            this.btnDeleteAllLog.UseVisualStyleBackColor = true;
-            // 
             // grpbSuaraAlarm
             // 
+            this.grpbSuaraAlarm.Controls.Add(this.alertPlayer);
             this.grpbSuaraAlarm.Controls.Add(this.cmbxAlarm);
             this.grpbSuaraAlarm.Controls.Add(this.btnTestAlem);
             this.grpbSuaraAlarm.Location = new System.Drawing.Point(21, 281);
             this.grpbSuaraAlarm.Name = "grpbSuaraAlarm";
-            this.grpbSuaraAlarm.Size = new System.Drawing.Size(200, 77);
+            this.grpbSuaraAlarm.Size = new System.Drawing.Size(200, 142);
             this.grpbSuaraAlarm.TabIndex = 13;
             this.grpbSuaraAlarm.TabStop = false;
             this.grpbSuaraAlarm.Text = "SuaraAlarm";
+            // 
+            // alertPlayer
+            // 
+            this.alertPlayer.Enabled = true;
+            this.alertPlayer.Location = new System.Drawing.Point(6, 75);
+            this.alertPlayer.Name = "alertPlayer";
+            this.alertPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("alertPlayer.OcxState")));
+            this.alertPlayer.Size = new System.Drawing.Size(188, 61);
+            this.alertPlayer.TabIndex = 9;
             // 
             // grpbPendeteksianSuara
             // 
@@ -223,6 +234,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtgLogMessage)).EndInit();
             this.grpbControlLog.ResumeLayout(false);
             this.grpbSuaraAlarm.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.alertPlayer)).EndInit();
             this.grpbPendeteksianSuara.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -247,6 +259,7 @@
         private System.Windows.Forms.Button btnDeleteLog;
         private System.Windows.Forms.GroupBox grpbSuaraAlarm;
         private System.Windows.Forms.GroupBox grpbPendeteksianSuara;
+        private AxWMPLib.AxWindowsMediaPlayer alertPlayer;
     }
 }
 

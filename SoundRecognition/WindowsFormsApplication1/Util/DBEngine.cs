@@ -151,7 +151,7 @@ namespace WindowsFormsApplication1.Util
 
 
 
-        public List<LogAudioDetection> getAllLogAudioDetectionShortByDateForListView()
+        public List<LogAudioDetection> getAllLogAudioDetectionShortByDateForDataGrid()
         {
             string query = "SELECT log_audio_detected.log_id, audio_type.type_name,log_audio_detected.log_detected_time,log_audio_detected.log_message,log_audio_detected.log_seen_status from log_audio_detected,audio_type,fingerprint where log_audio_detected.fingerprint_id = fingerprint.fingerprint_id AND fingerprint.type_id = audio_type.type_id ORDER BY log_audio_detected.log_detected_time DESC ";
             List<LogAudioDetection> LogAudios = new List<LogAudioDetection>();
@@ -197,6 +197,39 @@ namespace WindowsFormsApplication1.Util
                 return null;
             }
         }
+
+        public void insertLogSoundDetected(List<LogAudioDetection> insertValue)
+        {
+            MySqlCommand command = new MySqlCommand(null, connection);
+            command.CommandText = "INSERT INTO log_audio_detected " +
+                "values (@logId,@fingerprintId,@logDetectedTime,@logSeenStatus,@logMessage)";
+
+            MySqlParameter logIdParam = new MySqlParameter("@logId", MySqlDbType.String);
+            MySqlParameter fingerprintIdParam = new MySqlParameter("@fingerprintId", MySqlDbType.Int32);
+            MySqlParameter logDetectedTimeParam = new MySqlParameter("@logDetectedTime", MySqlDbType.String);
+            MySqlParameter logSeenStatusParam = new MySqlParameter("@logSeenStatus", MySqlDbType.String);
+            MySqlParameter logMessageParam = new MySqlParameter("@logMessage", MySqlDbType.String);
+
+            command.Parameters.Add(logIdParam);
+            command.Parameters.Add(fingerprintIdParam);
+            command.Parameters.Add(logDetectedTimeParam);
+            command.Parameters.Add(logSeenStatusParam);
+            command.Parameters.Add(logMessageParam);
+
+            foreach (LogAudioDetection log in insertValue)
+            {
+                command.Parameters[0].Value = log.LogId;
+                command.Parameters[1].Value = log.FingerprintId.FingerPrintData;
+                command.Parameters[2].Value = log.LogDetectionTime;
+                command.Parameters[3].Value = log.LogSeenStatus;
+                command.Parameters[4].Value = log.LogMessage;
+
+                command.Prepare();
+                command.ExecuteNonQuery();
+
+            }
+        }
+
 
         public List<LogAudioDetection> getAllLogAudioDetectionShortByDate()
         {

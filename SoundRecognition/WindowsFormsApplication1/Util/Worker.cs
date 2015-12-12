@@ -73,13 +73,14 @@ namespace WindowsFormsApplication1.Util
             
             while (!_shouldStop) { 
                 startReq();                
-                Thread.Sleep(6000);
+                Thread.Sleep(3000);
                 stopReq(p);
                 
                 //algoritma pattern matching
             
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.UseShellExecute = false;
+                processStartInfo.CreateNoWindow = true;
                 processStartInfo.FileName = JAVA_LOCATION;
                 processStartInfo.Arguments = "-jar " + RECOGNIZER_APP + " D:\\file" + p + ".wav";
            
@@ -105,11 +106,7 @@ namespace WindowsFormsApplication1.Util
                 if(log != null) dtgLogMessage.Invoke(processDelegate, log);
                 logItem = null;
 
-
-                //ringing an alert
-               
-
-                
+                //ringing an alert                
             }
 
         }
@@ -136,7 +133,7 @@ namespace WindowsFormsApplication1.Util
                     DateTime current = DateTime.Now;
                     item.LogDetectionTime = current.ToString();
                     item.LogSeenStatus = "false";
-
+                    
                     String messageCode = ""+current.Year;
                     messageCode += GenerateStringNumber(current.Month);
                     messageCode += GenerateStringNumber(current.Day);
